@@ -28,7 +28,7 @@ void jacobi() {
     // 1st iteration
     for (int i = 0; i < N; i++) {
         cur[i] = getvalue(i, prev);
-        cout << cur[i] << " \n"[i == N - 1];
+        // cout << cur[i] << " \n"[i == N - 1];
     }
     int iterations = 10;
     vector<double> d(N, 0.0); // like dx, dy, dz
@@ -39,11 +39,13 @@ void jacobi() {
         for (int i = 0; i < N; i++) {
             cur[i] = getvalue(i, prev);
             d[i] = fabs(cur[i] - prev[i]);
-            cout << cur[i] << " \n"[i == N - 1];
+            // cout << cur[i] << " \n"[i == N - 1];
+            // printf("%lf ", d[i]);
+            // if(i == N -1) puts("");
             eavg += d[i];
         }
         eavg = eavg / N;
-        if(eavg <= eps) break;
+        printf("%lf\n", eavg);
     }
 }
 
@@ -52,7 +54,7 @@ void gauss_seidel() {
     // 1st iteration
     for (int i = 0; i < N; i++) {
         cur[i] = getvalue(i, cur);
-        cout << cur[i] << " \n"[i == N - 1];
+        // cout << cur[i] << " \n"[i == N - 1];
     }
 
     int iterations = 10;
@@ -64,11 +66,14 @@ void gauss_seidel() {
         prev = cur;
         for (int i = 0; i < N; i++) {
             cur[i] = getvalue(i, cur);
-            cout << cur[i] << " \n"[i == N - 1];
             d[i] = fabs(cur[i] - prev[i]);
+            eavg += d[i];
+            // cout << cur[i] << " \n"[i == N - 1];
+            // printf("%lf ", d[i]);
+            if(i == N -1) puts("");
         }
         eavg /= N;
-        // cout << eavg << " ";
+        printf("%lf ", eavg);
     }
 }
 
@@ -90,7 +95,7 @@ int main() {
         cin >> C[i];
     }
 
-    // jacobi();
+    jacobi();
     // gauss_seidel();
 
     return 0;
